@@ -3,25 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecionando...</title>
+  <title>Abrir pasta</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; text-align: center; padding: 80px 20px; }
+    #ios { display: none; }
+    .btn {
+      display: inline-block; padding: 16px 28px; font-size: 18px;
+      background: #1a73e8; color: #fff; text-decoration: none; border-radius: 12px;
+    }
+  </style>
 
-  <!-- ============================================================
-       PARA MUDAR O DESTINO, ALTERE A URL NESTES 3 LUGARES:
-       1) meta refresh (abaixo)
-       2) variável DESTINO no script
-       3) link de segurança no body
-       ============================================================ -->
-
-  <!-- Redirecionamento imediato via HTML (funciona sem JavaScript) -->
-  <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/1YdfahtmqoSLOfqBcJbeAriK5TsspiCQx?usp=sharing">
-
-  <!-- Redirecionamento imediato via JavaScript -->
   <script>
-    var DESTINO = "https://drive.google.com/drive/folders/1YdfahtmqoSLOfqBcJbeAriK5TsspiCQx?usp=sharing"; // troque por ex.: "https://seusite.com/pagina-final"
-    window.location.replace(DESTINO);
+    var DESTINO = "https://drive.google.com/drive/folders/1YdfahtmqoSLOfqBcJbeAriK5TsspiCQx?usp=sharing";
+
+    var ua = navigator.userAgent;
+    // iPadOS recente se identifica como Mac, por isso o teste de touch
+    var isIOS = /iPhone|iPad|iPod/.test(ua) ||
+                (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+    if (!isIOS) {
+      // Android / desktop: redireciona direto
+      window.location.replace(DESTINO);
+    } else {
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("ios").style.display = "block";
+        document.getElementById("auto").style.display = "none";
+      });
+    }
   </script>
 </head>
-<body style="font-family: sans-serif; text-align: center; padding-top: 80px;">
-  <p><a href="https://drive.google.com/drive/folders/1YdfahtmqoSLOfqBcJbeAriK5TsspiCQx?usp=sharing">clique aqui</a>.</p>
+<body>
+  <!-- Mostrado no iPhone/iPad: o toque permite abrir no app do Drive -->
+  <div id="ios">
+    <p>Toque abaixo para abrir a pasta:</p>
+    <a class="btn" href="https://drive.google.com/drive/folders/1YdfahtmqoSLOfqBcJbeAriK5TsspiCQx?usp=sharing">
+      Abrir no Google Drive
+    </a>
+  </div>
+
+  <!-- Fallback para quem está sem JavaScript -->
+  <noscript>
+    <p><a href="https://drive.google.com/drive/folders/1YdfahtmqoSLOfqBcJbeAriK5TsspiCQx?usp=sharing">Clique aqui</a></p>
+  </noscript>
+  <p id="auto">Redirecionando...</p>
 </body>
 </html>
