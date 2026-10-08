@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecionando...</title>
+
+  <!-- ============================================================
+       PARA MUDAR O DESTINO, ALTERE A URL NESTES 3 LUGARES:
+       1) meta refresh (abaixo)
+       2) variável DESTINO no script
+       3) link de segurança no body
+       ============================================================ -->
+
+  <!-- Redirecionamento imediato via HTML (funciona sem JavaScript) -->
+  <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/1YdfahtmqoSLOfqBcJbeAriK5TsspiCQx?usp=sharing">
+
+  <!-- Redirecionamento imediato via JavaScript -->
+  <script>
+    var DESTINO = "https://drive.google.com/drive/folders/1YdfahtmqoSLOfqBcJbeAriK5TsspiCQx?usp=sharing"; // troque por ex.: "https://seusite.com/pagina-final"
+    window.location.replace(DESTINO);
+  </script>
+</head>
+<body style="font-family: sans-serif; text-align: center; padding-top: 80px;">
+  <p><a href="https://drive.google.com/drive/folders/1YdfahtmqoSLOfqBcJbeAriK5TsspiCQx?usp=sharing">clique aqui</a>.</p>
+</body>
+</html>
